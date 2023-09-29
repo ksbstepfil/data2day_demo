@@ -1,12 +1,8 @@
-import os
-
-import duckdb
 import pandas as pd
-import plotly.express as px
-from dagster import MetadataValue, OpExecutionContext, asset
-from dagster_dbt import DbtCliResource, dbt_assets, get_asset_key_for_model
+from dagster import OpExecutionContext, asset
+from dagster_dbt import DbtCliResource, dbt_assets
 
-from .constants import dbt_manifest_path, dbt_project_dir
+from .constants import dbt_manifest_path
 
 @asset(compute_kind="python")
 def raw_customers(context) -> pd.DataFrame:
@@ -33,4 +29,10 @@ def raw_payments(context) -> pd.DataFrame: # -> None:
 def jaffle_shop_dbt_assets(context: OpExecutionContext, dbt: DbtCliResource):
     yield from dbt.cli(["build"], context=context).stream()
 
-assets = [raw_customers, raw_orders, raw_payments, jaffle_shop_dbt_assets]
+@asset(compute_kind="python")
+def sensor_parquet_data(context) -> pd.DataFrame:
+    data = pd.read_parquet("../../sensor_dagster_test/*.parquet")
+
+    context.add_output_metadata({"num_rows": data.shape[0]})
+    return data
+

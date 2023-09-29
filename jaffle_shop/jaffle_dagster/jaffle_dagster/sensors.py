@@ -1,10 +1,13 @@
 import os
-from dagster import sensor, RunRequest, RunConfig, op, job, Config
+from dagster import define_asset_job, sensor, RunRequest, RunConfig
+from .assets import sensor_parquet_data
 from .jobs import FileConfig, log_file_job
 
-MY_DIRECTORY = "/Users/filipstepniak/PARA/1_Projects/data2day_demo/parquet_samples/"
+MY_DIRECTORY = "../../parquet_samples/"
 
-@sensor(job=log_file_job)
+asset_job_sensor = define_asset_job(name="job_sensor", selection=[sensor_parquet_data])
+
+@sensor(job=asset_job_sensor)
 def my_directory_sensor():
     for filename in os.listdir(MY_DIRECTORY):
         filepath = os.path.join(MY_DIRECTORY, filename)

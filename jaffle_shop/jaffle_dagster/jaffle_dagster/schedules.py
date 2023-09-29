@@ -6,9 +6,9 @@ To add a daily schedule that materializes your dbt assets, uncomment the followi
 # from .assets import jaffle_shop_dbt_assets
 
 from dagster import ScheduleDefinition
-from .jobs import all_assets_job
+from .jobs import dbt_assets_job
 
-basic_schedule = ScheduleDefinition(job=all_assets_job, cron_schedule="39 9 * * *")
+basic_schedule = ScheduleDefinition(job=dbt_assets_job, cron_schedule="39 9 * * *")
 
 schedules = [
     basic_schedule

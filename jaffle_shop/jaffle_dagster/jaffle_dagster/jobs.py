@@ -13,4 +13,6 @@ def process_file(context, config: FileConfig) -> None:
 def log_file_job():
     process_file()
 
-all_assets_job = define_asset_job(name="all_assets_job")
+dbt_assets_job = define_asset_job(name="all_assets_job")
+    #selection=["raw_customers", "raw_orders", "raw_payments", "jaffle_shop_dbt_assets"])
+# all_assets_job = define_asset_job(name="all_assets_job")
