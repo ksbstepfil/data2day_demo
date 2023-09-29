@@ -7,3 +7,11 @@ sources:
         meta:
           dagster:
             asset_key: ["raw_customers"] # This metadata specifies the corresponding Dagster asset for this dbt source.
+      - name: raw_orders
+        meta:
+          dagster:
+            asset_key: ["raw_orders"]
+      - name: raw_payments
+        meta:
+          dagster:
+            asset_key: ["raw_payments"]
