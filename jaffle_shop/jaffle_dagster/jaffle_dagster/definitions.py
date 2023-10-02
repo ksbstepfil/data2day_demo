@@ -8,13 +8,13 @@ from .assets import raw_customers, raw_orders, raw_payments, jaffle_shop_dbt_ass
 from .constants import dbt_project_dir
 from .schedules import schedules
 from .sensors import my_directory_sensor
-from .jobs import dbt_assets_job
+from .jobs import dbt_assets_job ,asset_job_sensor
 
 defs = Definitions(
     assets=[raw_customers, raw_orders, raw_payments, jaffle_shop_dbt_assets, sensor_parquet_data],
     schedules=schedules,
     sensors=[my_directory_sensor],
-    jobs=[dbt_assets_job],
+    jobs=[dbt_assets_job, asset_job_sensor],
     resources={
         "dbt": DbtCliResource(project_dir=os.fspath(dbt_project_dir)),
         "io_manager": SnowflakePandasIOManager(

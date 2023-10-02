@@ -1,11 +1,9 @@
 import os
 from dagster import define_asset_job, sensor, RunRequest, RunConfig
-from .assets import sensor_parquet_data
-from .jobs import FileConfig, log_file_job
+from .assets import MyAssetConfig
+from .jobs import FileConfig, asset_job_sensor
 
-MY_DIRECTORY = "../../parquet_samples/"
-
-asset_job_sensor = define_asset_job(name="job_sensor", selection=[sensor_parquet_data])
+MY_DIRECTORY = "../../sensor_dagster_test/"
 
 @sensor(job=asset_job_sensor)
 def my_directory_sensor():
@@ -15,6 +13,8 @@ def my_directory_sensor():
             yield RunRequest(
                 run_key=filename,
                 run_config=RunConfig(
-                    ops={"process_file": FileConfig(filename=filename)}
+                    {"sensor_parquet_data": MyAssetConfig(filepath=filepath)}
+                # run_config=RunConfig(
+                #     ops={"process_file": FileConfig(filepath=filepath)}
                 ),
             )
