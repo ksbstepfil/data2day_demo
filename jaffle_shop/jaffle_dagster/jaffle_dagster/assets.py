@@ -1,5 +1,5 @@
 import pandas as pd
-from dagster import OpExecutionContext, asset, Config
+from dagster import OpExecutionContext, asset, Config, op
 from dagster_dbt import DbtCliResource, dbt_assets
 
 from .constants import dbt_manifest_path
@@ -29,15 +29,19 @@ def raw_payments(context) -> pd.DataFrame: # -> None:
 def jaffle_shop_dbt_assets(context: OpExecutionContext, dbt: DbtCliResource):
     yield from dbt.cli(["build"], context=context).stream()
 
+# class MyAssetConfig(Config):
+#     filepath: str
 
-class MyAssetConfig(Config):
-    filepath: str
+# @op
+# def process_file(config: MyAssetConfig) -> pd.DataFrame:
+#     # context.log.info(config.filepath)
+#     data = pd.read_parquet(config.filepath)
+#     # context.add_output_metadata({"num_rows": data.shape[0]})
+#     return data
 
 @asset(compute_kind="python")
-def sensor_parquet_data(context, config: MyAssetConfig) -> pd.DataFrame: #filepath
-    data = pd.read_parquet(config.filepath)
-    #("/Users/filipstepniak/PARA/1_Projects/data2day_demo/sensor_dagster_test/userdata1.parquet") #("../../sensor_dagster_test/*.parquet")
-
+def sensor_parquet_data(context): # -> pd.DataFrame: #filepath
+    data = pd.read_parquet("/Users/filipstepniak/PARA/1_Projects/data2day_demo/sensor_dagster_test/userdata1.parquet")
     context.add_output_metadata({"num_rows": data.shape[0]})
     return data
 
