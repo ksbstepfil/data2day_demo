@@ -1,5 +1,4 @@
-
-target/
+jaffle_shop/target/
 dbt_modules/
 logs/
 **/.DS_Store
