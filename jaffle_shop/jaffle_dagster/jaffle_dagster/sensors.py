@@ -10,3 +10,6 @@ def my_directory_sensor():
         filepath = os.path.join(SENSOR_DIRECTORY, filename)
         if os.path.isfile(filepath) and filepath.endswith(".parquet"):
             yield RunRequest(run_key=filename)
+
+
+sensors = [my_directory_sensor]

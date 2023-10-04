@@ -7,13 +7,13 @@ from dagster_snowflake_pandas import SnowflakePandasIOManager
 from . import assets
 from .constants import DBT_PROJECT_DIR, SENSOR_DIRECTORY
 from .schedules import schedules
-from .sensors import my_directory_sensor
+from .sensors import sensors
 from .resources import PandasParquetIOManager
 
 defs = Definitions(
     assets=load_assets_from_modules([assets]),
     schedules=schedules,
-    sensors=[my_directory_sensor],
+    sensors=sensors,
     resources={
         "dbt": DbtCliResource(project_dir=os.fspath(DBT_PROJECT_DIR)),
         "snowflake_io_manager": SnowflakePandasIOManager(
