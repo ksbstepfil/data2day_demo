@@ -2,7 +2,7 @@ import os
 from dagster import sensor, RunRequest, RunConfig
 from .jobs import FileConfig, log_file_job
 
-MY_DIRECTORY = "../../parquet_samples/"
+MY_DIRECTORY = "../../sensor_demo/"
 
 
 @sensor(job=log_file_job)
