@@ -5,14 +5,13 @@ from dagster_dbt import DbtCliResource
 
 
 SENSOR_DIRECTORY = "../../sensor_demo/"
-
-dbt_project_dir = Path(__file__).joinpath("..", "..", "..").resolve()
-dbt = DbtCliResource(project_dir=os.fspath(dbt_project_dir))
+DBT_PROJECT_DIR = Path(__file__).joinpath("..", "..", "..").resolve()
 
 # If DAGSTER_DBT_PARSE_PROJECT_ON_LOAD is set, a manifest will be created at run time.
 # Otherwise, we expect a manifest to be present in the project's target directory.
 if os.getenv("DAGSTER_DBT_PARSE_PROJECT_ON_LOAD"):
+    dbt = DbtCliResource(project_dir=os.fspath(DBT_PROJECT_DIR))
     dbt_parse_invocation = dbt.cli(["parse"]).wait()
-    dbt_manifest_path = dbt_parse_invocation.target_path.joinpath("manifest.json")
+    DBT_MANIFEST_PATH = dbt_parse_invocation.target_path.joinpath("manifest.json")
 else:
-    dbt_manifest_path = dbt_project_dir.joinpath("target", "manifest.json")
+    DBT_MANIFEST_PATH = DBT_PROJECT_DIR.joinpath("target", "manifest.json")

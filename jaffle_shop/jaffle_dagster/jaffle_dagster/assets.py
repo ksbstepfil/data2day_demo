@@ -2,7 +2,7 @@ import pandas as pd
 from dagster import OpExecutionContext, asset
 from dagster_dbt import DbtCliResource, dbt_assets
 
-from .constants import dbt_manifest_path
+from .constants import DBT_MANIFEST_PATH
 
 
 @asset(compute_kind="python", io_manager_key="snowflake_io_manager")
@@ -31,7 +31,7 @@ def raw_payments(context) -> pd.DataFrame:  # -> None:
     return data
 
 
-@dbt_assets(manifest=dbt_manifest_path, io_manager_key="snowflake_io_manager")
+@dbt_assets(manifest=DBT_MANIFEST_PATH, io_manager_key="snowflake_io_manager")
 def jaffle_shop_dbt_assets(context: OpExecutionContext, dbt: DbtCliResource):
     yield from dbt.cli(["build"], context=context).stream()
 
