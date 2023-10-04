@@ -1,17 +1,18 @@
 import os
 
-from dagster import Definitions, EnvVar, DagsterInvalidDefinitionError
+from dagster import Definitions, EnvVar, load_assets_from_modules
 from dagster_dbt import DbtCliResource
 from dagster_snowflake_pandas import SnowflakePandasIOManager
 
-from .assets import assets
-from .constants import DBT_PROJECT_DIR
+from . import assets
+from .constants import DBT_PROJECT_DIR, SENSOR_DIRECTORY
 from .schedules import schedules
 from .sensors import my_directory_sensor
 from .jobs import all_assets_job
+from .resources import PandasParquetIOManager
 
 defs = Definitions(
-    assets=assets,
+    assets=load_assets_from_modules([assets]),
     schedules=schedules,
     sensors=[my_directory_sensor],
     jobs=[all_assets_job],
@@ -23,5 +24,6 @@ defs = Definitions(
             password=EnvVar("SNOWFLAKE_PASSWORD"),
             database="DATA2DAY_DEMO",
         ),
+        "sensor_io_manager": PandasParquetIOManager(root_path=SENSOR_DIRECTORY),
     },
 )

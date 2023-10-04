@@ -15,3 +15,7 @@ sources:
         meta:
           dagster:
             asset_key: ["raw_payments"]
+      - name: source_parquet_data
+        meta:
+          dagster:
+            asset_key: ["source_parquet_data"]
