@@ -1,8 +1,9 @@
+from dagster import Config, define_asset_job, job, op
 
-from dagster import Config, ScheduleDefinition, define_asset_job, job, op
 
 class FileConfig(Config):
     filename: str
+
 
 @op
 def process_file(context, config: FileConfig) -> None:
@@ -12,5 +13,6 @@ def process_file(context, config: FileConfig) -> None:
 @job
 def log_file_job():
     process_file()
+
 
 all_assets_job = define_asset_job(name="all_assets_job")

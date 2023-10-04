@@ -21,10 +21,7 @@ defs = Definitions(
             account="xskqzat-bk95941",
             user=EnvVar("SNOWFLAKE_USER"),
             password=EnvVar("SNOWFLAKE_PASSWORD"),
-            database="DATA2DAY_DEMO",  # required
-            # role="writer",  # optional, defaults to the default role for the account
-            # warehouse="PLANTS",  # optional, defaults to default warehouse for the account
-            # schema="IRIS",  # optional, defaults to PUBLIC
-        )
+            database="DATA2DAY_DEMO",
+        ),
     },
 )

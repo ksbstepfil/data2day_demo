@@ -1,5 +1,5 @@
 import os
-from dagster import sensor, RunRequest, RunConfig, op, job, Config
+from dagster import sensor, RunRequest, RunConfig
 from .jobs import FileConfig, log_file_job
 
 MY_DIRECTORY = "/Users/filipstepniak/PARA/1_Projects/data2day_demo/parquet_samples/"
