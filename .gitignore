@@ -2,7 +2,7 @@ jaffle_shop/target/
 dbt_modules/
 logs/
 **/.DS_Store
-.DS_Store
+**/.DS_Store
 **/.user.yml
 .venv
 .env
