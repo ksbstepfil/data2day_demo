@@ -1,7 +1,10 @@
 from dagster import define_asset_job, AssetSelection
 
 
-all_assets_job = define_asset_job(name="all_assets_job")
+all_but_sensor_job = define_asset_job(
+    name="materialize_all_but_sensor",
+    selection=AssetSelection.all() - AssetSelection.groups("sensor_demo"),
+)
 
 sensor_job = define_asset_job(
     name="materialize_sensor", selection=AssetSelection.groups("sensor_demo")

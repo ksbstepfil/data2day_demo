@@ -1,6 +1,6 @@
 from dagster import ScheduleDefinition
-from .jobs import all_assets_job
+from .jobs import all_but_sensor_job
 
-basic_schedule = ScheduleDefinition(job=all_assets_job, cron_schedule="39 9 * * *")
+all_but_sensor_schedule = ScheduleDefinition(job=all_but_sensor_job, cron_schedule="47 13 * * *", execution_timezone="Europe/Berlin")
 
-schedules = [basic_schedule]
+schedules = [all_but_sensor_schedule]
