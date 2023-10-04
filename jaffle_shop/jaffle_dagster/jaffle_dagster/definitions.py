@@ -17,7 +17,7 @@ defs = Definitions(
     jobs=[all_assets_job],
     resources={
         "dbt": DbtCliResource(project_dir=os.fspath(dbt_project_dir)),
-        "io_manager": SnowflakePandasIOManager(
+        "snowflake_io_manager": SnowflakePandasIOManager(
             account="xskqzat-bk95941",
             user=EnvVar("SNOWFLAKE_USER"),
             password=EnvVar("SNOWFLAKE_PASSWORD"),

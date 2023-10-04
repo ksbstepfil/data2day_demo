@@ -5,7 +5,7 @@ from dagster_dbt import DbtCliResource, dbt_assets
 from .constants import dbt_manifest_path
 
 
-@asset(compute_kind="python")
+@asset(compute_kind="python", io_manager_key="snowflake_io_manager")
 def raw_customers(context) -> pd.DataFrame:
     data = pd.read_csv("https://docs.dagster.io/assets/customers.csv")
 
@@ -13,7 +13,7 @@ def raw_customers(context) -> pd.DataFrame:
     return data
 
 
-@asset(compute_kind="python")
+@asset(compute_kind="python", io_manager_key="snowflake_io_manager")
 def raw_orders(context) -> pd.DataFrame:
     data = pd.read_csv(
         "../../raw_data/raw_orders.csv"
@@ -23,7 +23,7 @@ def raw_orders(context) -> pd.DataFrame:
     return data
 
 
-@asset(compute_kind="python")
+@asset(compute_kind="python", io_manager_key="snowflake_io_manager")
 def raw_payments(context) -> pd.DataFrame:  # -> None:
     data = pd.read_csv("../../raw_data/raw_payments.csv")
 
@@ -31,7 +31,7 @@ def raw_payments(context) -> pd.DataFrame:  # -> None:
     return data
 
 
-@dbt_assets(manifest=dbt_manifest_path)
+@dbt_assets(manifest=dbt_manifest_path, io_manager_key="snowflake_io_manager")
 def jaffle_shop_dbt_assets(context: OpExecutionContext, dbt: DbtCliResource):
     yield from dbt.cli(["build"], context=context).stream()
 
