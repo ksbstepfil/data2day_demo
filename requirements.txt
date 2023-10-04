@@ -19,8 +19,8 @@ dagster==1.4.16
 dagster-dbt==0.20.16
 dagster-graphql==1.4.16
 dagster-postgres==0.20.16
-dagster-snowflake==0.20.15
-dagster-snowflake-pandas==0.20.15
+dagster-snowflake==0.20.16
+dagster-snowflake-pandas==0.20.16
 dagster-webserver==1.4.16
 dbt-core==1.6.3
 dbt-duckdb==1.6.0
