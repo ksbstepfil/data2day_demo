@@ -1,8 +1,5 @@
 with source as (
 
-    {#-
-    Use source instead of seed:
-    #}
     select * from {{ source('PUBLIC', 'raw_customers') }}
 
 ),
