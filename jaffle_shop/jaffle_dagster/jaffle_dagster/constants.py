@@ -3,6 +3,9 @@ from pathlib import Path
 
 from dagster_dbt import DbtCliResource
 
+
+SENSOR_DIRECTORY = "../../sensor_demo/"
+
 dbt_project_dir = Path(__file__).joinpath("..", "..", "..").resolve()
 dbt = DbtCliResource(project_dir=os.fspath(dbt_project_dir))
 
