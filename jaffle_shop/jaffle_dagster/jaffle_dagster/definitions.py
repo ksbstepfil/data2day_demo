@@ -8,14 +8,12 @@ from . import assets
 from .constants import DBT_PROJECT_DIR, SENSOR_DIRECTORY
 from .schedules import schedules
 from .sensors import my_directory_sensor
-from .jobs import all_assets_job
 from .resources import PandasParquetIOManager
 
 defs = Definitions(
     assets=load_assets_from_modules([assets]),
     schedules=schedules,
     sensors=[my_directory_sensor],
-    jobs=[all_assets_job],
     resources={
         "dbt": DbtCliResource(project_dir=os.fspath(DBT_PROJECT_DIR)),
         "snowflake_io_manager": SnowflakePandasIOManager(

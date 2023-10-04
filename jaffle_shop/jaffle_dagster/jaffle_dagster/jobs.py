@@ -1,18 +1,8 @@
-from dagster import Config, define_asset_job, job, op
-
-
-class FileConfig(Config):
-    filename: str
-
-
-@op
-def process_file(context, config: FileConfig) -> None:
-    context.log.info(config.filename)
-
-
-@job
-def log_file_job():
-    process_file()
+from dagster import define_asset_job, AssetSelection
 
 
 all_assets_job = define_asset_job(name="all_assets_job")
+
+sensor_job = define_asset_job(
+    name="materialize_sensor", selection=AssetSelection.groups("sensor_demo")
+)

@@ -5,10 +5,16 @@ from dagster_dbt import DbtCliResource, dbt_assets
 from .constants import DBT_MANIFEST_PATH
 
 
-raw_parquet_data = SourceAsset("raw_parquet_data", io_manager_key="sensor_io_manager")
+raw_parquet_data = SourceAsset(
+    "raw_parquet_data", io_manager_key="sensor_io_manager", group_name="sensor_demo"
+)
 
 
-@asset(compute_kind="python", io_manager_key="snowflake_io_manager")
+@asset(
+    compute_kind="python",
+    io_manager_key="snowflake_io_manager",
+    group_name="sensor_demo",
+)
 def source_parquet_data(context, raw_parquet_data):
     data = raw_parquet_data
 

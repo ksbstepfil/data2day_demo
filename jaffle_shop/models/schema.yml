@@ -80,3 +80,9 @@ models:
         description: Amount of the order (AUD) paid for by gift card
         tests:
           - not_null
+
+  - name: downstream_parquet_data
+    config:
+      meta:
+        dagster:
+          group: sensor_demo
