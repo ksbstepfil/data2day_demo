@@ -1,8 +1,6 @@
 import pandas as pd
-from upath import UPath
 
 from dagster import (
-    AssetKey,
     OutputContext,
     InputContext,
     ConfigurableIOManager,
