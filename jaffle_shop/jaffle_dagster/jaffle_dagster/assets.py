@@ -22,9 +22,11 @@ def source_parquet_data(context, raw_parquet_data):
     return data
 
 
-@asset(compute_kind="python",
-       io_manager_key="snowflake_io_manager",
-       group_name="schedule_demo")
+@asset(
+    compute_kind="python",
+    io_manager_key="snowflake_io_manager",
+    group_name="schedule_demo",
+)
 def raw_customers(context) -> pd.DataFrame:
     data = pd.read_csv("https://docs.dagster.io/assets/customers.csv")
 
@@ -32,9 +34,11 @@ def raw_customers(context) -> pd.DataFrame:
     return data
 
 
-@asset(compute_kind="python",
-       io_manager_key="snowflake_io_manager",
-       group_name="schedule_demo")
+@asset(
+    compute_kind="python",
+    io_manager_key="snowflake_io_manager",
+    group_name="schedule_demo",
+)
 def raw_orders(context) -> pd.DataFrame:
     data = pd.read_csv(
         "../../raw_data/raw_orders.csv"
@@ -44,9 +48,11 @@ def raw_orders(context) -> pd.DataFrame:
     return data
 
 
-@asset(compute_kind="python",
-       io_manager_key="snowflake_io_manager",
-       group_name="schedule_demo")
+@asset(
+    compute_kind="python",
+    io_manager_key="snowflake_io_manager",
+    group_name="schedule_demo",
+)
 def raw_payments(context) -> pd.DataFrame:  # -> None:
     data = pd.read_csv("../../raw_data/raw_payments.csv")
 
